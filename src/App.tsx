@@ -1,8 +1,15 @@
-import React from 'react';
-import logo from './assets/logo.svg';
-import './assets/App.css';
+import React from "react";
+import logo from "./assets/logo.svg";
+import "./assets/App.css";
+import { SkinFetcherService } from "./services/skin-fetcher.service";
 
 function App() {
+  const skinFetcher = new SkinFetcherService("fr_FR", "13.12.1");
+
+  console.log(
+    skinFetcher.returnChampionObject(skinFetcher.fetchChampion("Aatrox"))
+  );
+
   return (
     <div className="App">
       <header className="App-header">
