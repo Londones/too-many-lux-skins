@@ -8,20 +8,21 @@ export class SkinFetcherService {
   }
 
   public async fetchChampion(championName: string): Promise<any> {
-    let json: any;
+    let json: Promise<any>;
 
     const promise = await fetch(
       `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion/${championName}.json`
-    )
-      .then(async (response) => (json = await response.json()))
-      .catch((error) => console.log(error));
+    );
 
-    return JSON.parse(json);
+    json = await promise.json();
+
+    return json;
   }
 
-  public returnChampionObject(champion: Promise<any>): any {
-    const championObject = champion.then((champion) => champion.data);
-    return championObject;
+  public async returnChampionObject(champion: string): Promise<Object> {
+    return await this.fetchChampion(champion).then((data) => {
+      return data.data[champion];
+    });
   }
 
   public fetchChampionSkins(championName: string): any {
