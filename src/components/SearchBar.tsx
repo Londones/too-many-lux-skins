@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChampionFetcherService } from "../services/champion-fetcher.service";
 import { Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+
 interface SearchBarProps {
   championFetcher: ChampionFetcherService;
   onChampionSelect: (selectedChampion: string) => void;
@@ -64,7 +65,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <Select
       showSearch
-      allowClear
+      allowClear={true}
+      size="large"
       suffixIcon={<SearchOutlined />}
       className="w-[30%]"
       placeholder="Search a champion"
@@ -76,13 +78,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
     >
       {championsArray.map((champion) => (
         <Select.Option key={champion.id} value={champion.id}>
-          <div className="flex align-items">
+          <div className="flex items-center selectDiv">
             <img
               src={champion.squareAsset}
               alt={champion.championName}
               className="w-8 h-8 mr-2"
             />
-            <span className="mt-1">{champion.championName}</span>
+            <span>{champion.championName}</span>
           </div>
         </Select.Option>
       ))}
