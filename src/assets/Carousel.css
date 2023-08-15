@@ -1,0 +1,9 @@
+@import 'react-round-carousel/src/index.css';
+
+.carousel__controls {
+    margin-top: 10rem;
+}
+
+.carousel__slide {
+    height: auto;
+}

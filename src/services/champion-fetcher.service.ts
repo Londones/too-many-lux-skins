@@ -1,5 +1,5 @@
 export class ChampionFetcherService {
-  private language: string;
+  public language: string;
   public version: string;
   private championsData: any;
   private assetCache: { [key: string]: string } = {};
@@ -11,24 +11,6 @@ export class ChampionFetcherService {
       this.language = language;
     }
     this.version = version;
-  }
-
-  public async fetchChampion(championName: string): Promise<any> {
-    let json: Promise<any>;
-
-    const promise = await fetch(
-      `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion/${championName}.json`
-    );
-
-    json = await promise.json();
-
-    return json;
-  }
-
-  public async returnChampionObject(champion: string): Promise<Object> {
-    return await this.fetchChampion(champion).then((data) => {
-      return data.data[champion];
-    });
   }
 
   private async fetchChampionsData(language?: string): Promise<any> {

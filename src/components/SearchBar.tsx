@@ -62,10 +62,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setShowDropdown(false);
   };
 
+  const handleClear = () => {
+    onChampionSelect("");
+    setShowDropdown(false);
+  };
+
   return (
     <Select
       showSearch
-      allowClear={true}
+      allowClear
       size="large"
       suffixIcon={<SearchOutlined />}
       className="w-[30%]"
@@ -75,10 +80,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onFocus={handleFocus}
       onSearch={handleSearch}
       onSelect={handleChampionSelect}
+      onClear={handleClear}
     >
       {championsArray.map((champion) => (
         <Select.Option key={champion.id} value={champion.id}>
-          <div className="flex items-center selectDiv">
+          <div className="flex items-center">
             <img
               src={champion.squareAsset}
               alt={champion.championName}
