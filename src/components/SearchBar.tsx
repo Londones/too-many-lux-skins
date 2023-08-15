@@ -5,7 +5,7 @@ import { SearchOutlined } from "@ant-design/icons";
 
 interface SearchBarProps {
   championFetcher: ChampionFetcherService;
-  onChampionSelect: (selectedChampion: string) => void;
+  onChampionSelect: (selectedChampion: any) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -63,7 +63,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleClear = () => {
-    onChampionSelect("");
+    onChampionSelect(null);
     setShowDropdown(false);
   };
 
@@ -73,7 +73,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       allowClear
       size="large"
       suffixIcon={<SearchOutlined />}
-      className="w-[30%]"
+      className="w-[30%] mt-[15rem]"
       placeholder="Search a champion"
       filterOption={filterOption}
       open={showDropdown}

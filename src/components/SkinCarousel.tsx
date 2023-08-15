@@ -47,7 +47,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
 
   const spin = () => {
     const randomNum = Math.floor(Math.random() * skins.length);
-    let counter = carouselRef.current?.getSelectedIndex();
+    let counter = 0;
     let roundsNumber = 300 + randomNum;
     let roundsCompleted = 0;
     let totalRounds = 10;
@@ -55,7 +55,12 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     let timeoutId: any;
 
     const spinAnimation = () => {
-      carouselRef.current?.next();
+      if (randomNum % 2 === 0) {
+        carouselRef.current?.next();
+      } else {
+        carouselRef.current?.prev();
+      }
+
       let currentCounter = counter ?? 0;
       currentCounter++;
 
@@ -77,7 +82,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
   };
 
   return (
-    <div className="mt-5">
+    <div className={`mt-5`}>
       <Carousel
         ref={carouselRef}
         items={items}
@@ -91,6 +96,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
           icon={<SyncOutlined spin />}
           onClick={spin}
           size="large"
+          ghost={false}
         >
           Spin!
         </Button>

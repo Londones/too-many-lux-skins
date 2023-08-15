@@ -6,7 +6,7 @@ import SearchBar from "./components/SearchBar";
 import SkinCarousel from "./components/SkinCarousel";
 
 function App() {
-  const [champion, setChampion] = useState<string>("");
+  const [champion, setChampion] = useState<any>(null);
   const [version, setVersion] = useState<string>("13.15.1");
   const [langage, setLangage] = useState<string>("en_US"); // TODO: add langage selector [en_US, fr_FR, es_ES, de_DE, it_IT, ja_JP, ko_KR, pl_PL, pt_BR, ru_RU, tr_TR, zh_CN, zh_TW]
   const championFetcher = new ChampionFetcherService(version, langage);
@@ -24,10 +24,11 @@ function App() {
 
   const handleChampionSelect = (champion: string) => {
     setChampion(champion);
+    console.log(champion);
   };
 
   return (
-    <div className="App">
+    <div className="App bg-pan-right">
       <SearchBar
         championFetcher={championFetcher}
         onChampionSelect={handleChampionSelect}
