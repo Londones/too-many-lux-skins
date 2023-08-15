@@ -46,19 +46,16 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
   const carouselRef = React.createRef<CarouselRef>();
 
   const spin = () => {
-    const randomNum = Math.floor(Math.random() * skins.length); // 0 to skins.length - 1
+    const randomNum = Math.floor(Math.random() * skins.length);
     let counter = carouselRef.current?.getSelectedIndex();
-    let roundsNumber = 3;
+    let roundsNumber = 300 + randomNum;
     let roundsCompleted = 0;
-    let totalRounds = 5; // repeat the spin animation 5 times
-    let delay = 500; // 1 second delay between each slide change
+    let totalRounds = 10;
+    let delay = 1;
     let timeoutId: any;
 
     const spinAnimation = () => {
       carouselRef.current?.next();
-      console.log(carouselRef.current?.getSelectedIndex());
-      console.log("counter: ", counter);
-      console.log("randomNum: ", randomNum);
       let currentCounter = counter ?? 0;
       currentCounter++;
 
@@ -80,16 +77,24 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
   };
 
   return (
-    <div>
+    <div className="mt-5">
       <Carousel
         ref={carouselRef}
         items={items}
         showControls={true}
         slideOnClick
       />
-      <Button shape="round" icon={<SyncOutlined spin />} onClick={spin}>
-        Spin
-      </Button>
+      <div className="flex justify-center">
+        <Button
+          className="flex items-center mt-3"
+          shape="round"
+          icon={<SyncOutlined spin />}
+          onClick={spin}
+          size="large"
+        >
+          Spin!
+        </Button>
+      </div>
     </div>
   );
 };
