@@ -21,23 +21,21 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
 
   useEffect(() => {
     const fetchSkins = async () => {
-      setSkins([]);
       const skins = await skinFetcher.returnChampionSkins(champion);
       setChampName(skinFetcher.champName);
       setSkins(skins);
     };
 
     if (champion) {
-      setSkins([]);
       fetchSkins();
     }
   }, [champion]);
 
-  const items: CarouselItem[] = skins.map((skin: any) => ({
+  const items: CarouselItem[] = skins.map((skin: any, index: number) => ({
     alt: `${skin.name === "default" ? champion : skin.name}`,
     image: skinFetcher.skinNumToUrl(champion, skin.num),
     content: (
-      <div>
+      <div className={champion + index}>
         <span>{skin.name === "default" ? champName : skin.name}</span>
       </div>
     ),
@@ -79,6 +77,17 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     };
 
     timeoutId = setTimeout(spinAnimation, delay);
+    setTimeout(animateWinner, 2500);
+  };
+
+  const animateWinner = () => {
+    const winningSpan = carouselRef.current?.getSelectedIndex();
+    /*const winner = winningSpan?.closest(".carousel__slide");
+    winner?.classList.add("winner");
+    // remove winner class after 3 seconds
+    setTimeout(() => {
+      winner?.classList.remove("winner");
+    }, 3000);*/
   };
 
   return (
@@ -91,7 +100,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
       />
       <div className="flex justify-center">
         <Button
-          className="flex items-center mt-3"
+          className="flex items-center bg-white mt-3"
           shape="round"
           icon={<SyncOutlined spin />}
           onClick={spin}

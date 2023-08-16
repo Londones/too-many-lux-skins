@@ -2,10 +2,7 @@
 
 .App {
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  height: 100vh;
 }
 
 .carousel__controls {
@@ -15,3 +12,5 @@
 .carousel__slide {
   height: auto;
 }
+
+

@@ -24,7 +24,6 @@ function App() {
 
   const handleChampionSelect = (champion: string) => {
     setChampion(champion);
-    console.log(champion);
   };
 
   return (
@@ -34,7 +33,11 @@ function App() {
         onChampionSelect={handleChampionSelect}
       />
       {champion && (
-        <SkinCarousel champion={champion} championFetcher={championFetcher} />
+        <SkinCarousel
+          key={champion}
+          champion={champion}
+          championFetcher={championFetcher}
+        />
       )}
     </div>
   );
