@@ -29,7 +29,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     if (champion) {
       fetchSkins();
     }
-  }, [champion]);
+  }, [champion, championFetcher]);
 
   const items: CarouselItem[] = skins.map((skin: any, index: number) => ({
     alt: `${skin.name === "default" ? champion : skin.name}`,
@@ -47,8 +47,6 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     const randomNum = Math.floor(Math.random() * skins.length);
     let counter = 0;
     let roundsNumber = 300 + randomNum;
-    let roundsCompleted = 0;
-    let totalRounds = 10;
     let delay = 1;
     let timeoutId: any;
 
@@ -59,21 +57,18 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
         carouselRef.current?.prev();
       }
 
-      let currentCounter = counter ?? 0;
-      currentCounter++;
+      counter++;
 
-      if (currentCounter === randomNum) {
-        roundsCompleted++;
-        currentCounter = 0;
+      // delay increases by 1 every 10 rounds
+      if (counter % 100 === 0) {
+        delay *= 2;
       }
 
-      if (roundsCompleted === totalRounds) {
+      if (counter === roundsNumber) {
         clearTimeout(timeoutId!);
-      } else if (roundsNumber > 0) {
+      } else {
         timeoutId = setTimeout(spinAnimation, delay);
       }
-
-      roundsNumber--;
     };
 
     timeoutId = setTimeout(spinAnimation, delay);

@@ -1,4 +1,4 @@
-export async function fetchLanguages(): Promise<JSON> {
+export async function fetchLanguages(): Promise<string[]> {
   const response = await fetch(
     "https://ddragon.leagueoflegends.com/cdn/languages.json"
   );

@@ -19,23 +19,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      if (
-        localStorage.getItem("championsSquareAsset") === null ||
-        localStorage.getItem("lastVersion") !== championFetcher.version
-      ) {
-        const championsSquareAsset =
-          await championFetcher.fetchChampionsSquareAsset();
-        localStorage.setItem(
-          "championsSquareAsset",
-          JSON.stringify(championsSquareAsset)
-        );
-        localStorage.setItem("lastVersion", championFetcher.version);
-        setChampionsArray(championsSquareAsset);
-      } else {
-        setChampionsArray(
-          JSON.parse(localStorage.getItem("championsSquareAsset")!)
-        );
-      }
+      const championsSquareAsset =
+        await championFetcher.fetchChampionsSquareAsset();
+      setChampionsArray(championsSquareAsset);
     };
 
     fetchData();
@@ -73,7 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       allowClear
       size="large"
       suffixIcon={<SearchOutlined />}
-      className="w-[30%] mt-[15rem]"
+      className="w-[30%] mr-2"
       placeholder="Search a champion"
       filterOption={filterOption}
       open={showDropdown}
@@ -84,7 +70,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     >
       {championsArray.map((champion) => (
         <Select.Option key={champion.id} value={champion.id}>
-          <div className="flex items-center">
+          <div className="flex ml-[0.25rem] items-center">
             <img
               src={champion.squareAsset}
               alt={champion.championName}
