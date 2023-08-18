@@ -11,8 +11,8 @@ const TitleImage: React.FC<TitleImageProps> = ({ localTime }) => {
         className="title titleImg w-[15rem]"
         src={
           localTime >= 6 && localTime < 23
-            ? "../src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
-            : "../src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023.png"
+            ? "img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
+            : "img/TOO-MANY-LUX-SKINS-18-08-2023.png"
         }
         alt="Title"
       />
