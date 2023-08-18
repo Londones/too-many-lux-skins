@@ -109,7 +109,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
       />
       <div className="flex justify-center">
         <Button
-          className="flex items-center bg-white mt-3"
+          className="flex items-center bg-white my-3"
           shape="round"
           icon={<SyncOutlined spin />}
           onClick={spin}
