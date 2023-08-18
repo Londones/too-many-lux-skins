@@ -7,12 +7,14 @@ import SearchBar from "./components/SearchBar";
 import SkinCarousel from "./components/SkinCarousel";
 import LangageSelect from "./components/LangageSelect";
 import { HeartTwoTone } from "@ant-design/icons";
+import { BackgroundChangerService } from "./services/background-changer.service";
 
 function App() {
+  const backgroundChanger = new BackgroundChangerService();
+  const preferedLangage = localStorage.getItem("langage");
+  const [langage, setLangage] = useState<string>(preferedLangage ?? "en_US");
   const [champion, setChampion] = useState<any>(null);
   const [version, setVersion] = useState<string>("13.14.1");
-  const preferedLangage = localStorage.getItem("langage");
-  const [langage, setLangage] = useState<string>(preferedLangage ?? "en_US"); // TODO: add langage selector [en_US, fr_FR, es_ES, de_DE, it_IT, ja_JP, ko_KR, pl_PL, pt_BR, ru_RU, tr_TR, zh_CN, zh_TW]
   const championFetcher = new ChampionFetcherService(version, langage);
   const [languages, setLanguages] = useState<string[]>([]);
 
@@ -25,6 +27,7 @@ function App() {
       }
       const languages = await fetchLanguages();
       setLanguages(languages);
+      backgroundChanger.initBackground();
     };
 
     fetchData();
@@ -41,7 +44,7 @@ function App() {
 
   return (
     <div className="App bg-pan-right">
-      <div className="flex justify-center mt-[15rem]">
+      <div className="flex justify-center mt-[3rem]">
         <SearchBar
           championFetcher={championFetcher}
           onChampionSelect={handleChampionSelect}
@@ -55,6 +58,7 @@ function App() {
       </div>
       {champion && (
         <SkinCarousel
+          className={!champion ? "fade-in-top" : ""}
           key={champion}
           champion={champion}
           championFetcher={championFetcher}

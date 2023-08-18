@@ -8,16 +8,19 @@ import { SyncOutlined } from "@ant-design/icons";
 interface SkinCarouselProps {
   champion: string;
   championFetcher: ChampionFetcherService;
+  className?: string;
 }
 
 const SkinCarousel: React.FC<SkinCarouselProps> = ({
   championFetcher,
   champion,
+  className,
 }) => {
   const skinFetcher = new SkinFetcherService(championFetcher);
   const [skins, setSkins] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [champName, setChampName] = useState<string>("");
+  const [carouselClass, setCarouselClass] = useState<string>("");
 
   useEffect(() => {
     const fetchSkins = async () => {
@@ -30,6 +33,17 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
       fetchSkins();
     }
   }, [champion, championFetcher]);
+
+  useEffect(() => {
+    const setClass = () => {
+      setCarouselClass(className!);
+    };
+
+    if (!champion) {
+      console.log("no champion");
+      setClass();
+    }
+  }, [className, champion]);
 
   const items: CarouselItem[] = skins.map((skin: any, index: number) => ({
     alt: `${skin.name === "default" ? champion : skin.name}`,
@@ -86,7 +100,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
   };
 
   return (
-    <div className={`mt-5`}>
+    <div className={`${carouselClass} mt-5`}>
       <Carousel
         ref={carouselRef}
         items={items}

@@ -212,7 +212,6 @@ const LangageSelect: React.FC<LangageSelectProps> = ({
       onChange={(value) => setLangage(value)}
       size="large"
       onSelect={onSelect}
-      bordered={false}
     >
       {langagesToFlagsAndLangagesLabelsArray(languages).map((langage) => (
         <Select.Option key={langage?.value} value={langage?.value}>
