@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      backgroundChanger.initBackground();
       const mostRecentVersion = await fetchVersion();
       if (version !== mostRecentVersion) {
         setVersion(mostRecentVersion);
@@ -27,7 +28,6 @@ function App() {
       }
       const languages = await fetchLanguages();
       setLanguages(languages);
-      backgroundChanger.initBackground();
     };
 
     fetchData();
