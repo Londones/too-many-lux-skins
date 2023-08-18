@@ -13,7 +13,7 @@ export class SkinFetcherService {
     let json: Promise<any>;
 
     const promise = await fetch(
-      `http://ddragon.leagueoflegends.com/cdn/${this.champService.version}/data/${this.champService.language}/champion/${championName}.json`
+      `https://ddragon.leagueoflegends.com/cdn/${this.champService.version}/data/${this.champService.language}/champion/${championName}.json`
     );
 
     json = await promise.json();
@@ -38,7 +38,7 @@ export class SkinFetcherService {
   public skinNumToUrl(champion: string, skinNum: number): string {
     var skinUrl: string = "";
     try {
-      skinUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion}_${skinNum}.jpg`;
+      skinUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion}_${skinNum}.jpg`;
     } catch (error) {
       console.log("Error: ");
     }

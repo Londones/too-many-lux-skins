@@ -17,7 +17,7 @@ export class ChampionFetcherService {
     if (!language) {
       this.language = "en_US";
     }
-    const url = `http://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion.json`;
+    const url = `https://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion.json`;
     const response = await fetch(url);
     const data = await response.json();
     return data.data;
@@ -25,7 +25,7 @@ export class ChampionFetcherService {
 
   public async fetchChampionSquareAsset(champion: string): Promise<string> {
     var championImage = this.championsData[champion].image.full;
-    const assetUrl = `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${championImage}`;
+    const assetUrl = `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${championImage}`;
     this.assetCache[championImage] = assetUrl;
     return assetUrl;
   }
