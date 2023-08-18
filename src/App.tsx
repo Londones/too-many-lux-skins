@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App bg-pan-right">
       <TitleImage localTime={localTime} />
-      <div className="flex justify-center mt-[3rem]">
+      <div className="flex justify-center mt-[2rem]">
         <SearchBar
           championFetcher={championFetcher}
           onChampionSelect={handleChampionSelect}
