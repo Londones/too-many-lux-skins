@@ -10,7 +10,7 @@ export class BackgroundChangerService {
     const img = document.querySelector(".titleImg");
     img?.setAttribute(
       "src",
-      "src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023 (1).png"
+      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
     );
   }
 
@@ -23,10 +23,7 @@ export class BackgroundChangerService {
     document.querySelector(".z-3")?.classList.remove("hidden");
     document.querySelector(".footer")?.classList.add("white");
     const img = document.querySelector(".titleImg");
-    img?.setAttribute(
-      "src",
-      "src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023.png"
-    );
+    img?.setAttribute("src", "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023.png");
   }
 
   private sunsetBackground() {
@@ -40,7 +37,7 @@ export class BackgroundChangerService {
     const img = document.querySelector(".titleImg");
     img?.setAttribute(
       "src",
-      "src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023 (1).png"
+      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
     );
   }
 
@@ -55,7 +52,7 @@ export class BackgroundChangerService {
     const img = document.querySelector(".titleImg");
     img?.setAttribute(
       "src",
-      "src/assets/img/TOO-MANY-LUX-SKINS-18-08-2023 (1).png"
+      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
     );
   }
 
