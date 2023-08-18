@@ -7,11 +7,6 @@ export class BackgroundChangerService {
     document.querySelector(".z-2")?.classList.add("hidden");
     document.querySelector(".z-3")?.classList.add("hidden");
     document.querySelector(".footer")?.classList.remove("white");
-    const img = document.querySelector(".titleImg");
-    img?.setAttribute(
-      "src",
-      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
-    );
   }
 
   private nightBackground() {
@@ -22,8 +17,6 @@ export class BackgroundChangerService {
     document.querySelector(".z-2")?.classList.remove("hidden");
     document.querySelector(".z-3")?.classList.remove("hidden");
     document.querySelector(".footer")?.classList.add("white");
-    const img = document.querySelector(".titleImg");
-    img?.setAttribute("src", "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023.png");
   }
 
   private sunsetBackground() {
@@ -34,11 +27,6 @@ export class BackgroundChangerService {
     document.querySelector(".z-2")?.classList.add("hidden");
     document.querySelector(".z-3")?.classList.add("hidden");
     document.querySelector(".footer")?.classList.remove("white");
-    const img = document.querySelector(".titleImg");
-    img?.setAttribute(
-      "src",
-      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
-    );
   }
 
   private afternoonBackground() {
@@ -49,15 +37,9 @@ export class BackgroundChangerService {
     document.querySelector(".z-2")?.classList.add("hidden");
     document.querySelector(".z-3")?.classList.add("hidden");
     document.querySelector(".footer")?.classList.remove("white");
-    const img = document.querySelector(".titleImg");
-    img?.setAttribute(
-      "src",
-      "./assets/img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
-    );
   }
 
-  public initBackground() {
-    const localTime = new Date().getHours();
+  public initBackground(localTime: number) {
     if (localTime >= 6 && localTime < 12) {
       this.morningBackground();
     } else if (localTime >= 12 && localTime < 18) {

@@ -8,9 +8,11 @@ import SkinCarousel from "./components/SkinCarousel";
 import LangageSelect from "./components/LangageSelect";
 import { HeartTwoTone } from "@ant-design/icons";
 import { BackgroundChangerService } from "./services/background-changer.service";
+import TitleImage from "./components/TitleImage";
 
 function App() {
   const backgroundChanger = new BackgroundChangerService();
+  const localTime = new Date().getHours();
   const preferedLangage = localStorage.getItem("langage");
   const [langage, setLangage] = useState<string>(preferedLangage ?? "en_US");
   const [champion, setChampion] = useState<any>(null);
@@ -20,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      backgroundChanger.initBackground();
+      backgroundChanger.initBackground(localTime);
       const mostRecentVersion = await fetchVersion();
       if (version !== mostRecentVersion) {
         setVersion(mostRecentVersion);
@@ -44,6 +46,7 @@ function App() {
 
   return (
     <div className="App bg-pan-right">
+      <TitleImage localTime={localTime} />
       <div className="flex justify-center mt-[3rem]">
         <SearchBar
           championFetcher={championFetcher}
