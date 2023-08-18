@@ -6,16 +6,14 @@ interface TitleImageProps {
 
 const TitleImage: React.FC<TitleImageProps> = ({ localTime }) => {
   return (
-    <div className="flex justify-center mt-2">
-      <img
-        className="title titleImg w-[15rem]"
-        src={
-          localTime >= 6 && localTime < 23
-            ? "img/TOO-MANY-LUX-SKINS-18-08-2023(1).png"
-            : "img/TOO-MANY-LUX-SKINS-18-08-2023.png"
+    <div className="flex justify-center">
+      <div
+        className={
+          localTime >= 6 && localTime < 22
+            ? "flex justify-center titleImg title day"
+            : "flex justify-center titleImg title night"
         }
-        alt="Title"
-      />
+      ></div>
     </div>
   );
 };

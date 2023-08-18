@@ -44,7 +44,7 @@ export class BackgroundChangerService {
       this.morningBackground();
     } else if (localTime >= 12 && localTime < 18) {
       this.afternoonBackground();
-    } else if (localTime >= 18 && localTime < 23) {
+    } else if (localTime >= 18 && localTime < 22) {
       this.sunsetBackground();
     } else {
       this.nightBackground();

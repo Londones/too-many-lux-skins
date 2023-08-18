@@ -116,6 +116,20 @@ body {
     width: 15rem;
 }
 
+.day {
+    background-image: url("./img/day.png");
+    background-size : contain;
+    width: 11rem;
+    height: 7rem;
+}
+
+.night {
+    background-image: url("./img/night.png");
+    background-size : contain;
+    width: 16rem;
+    height: 7rem;
+}
+
 .titleImg:hover {
     -webkit-animation: heartbeat 1.5s ease-in-out both;
     animation: heartbeat 1.5s ease-in-out both;
