@@ -119,6 +119,7 @@ body {
 .titleImg:hover {
     -webkit-animation: heartbeat 1.5s ease-in-out both;
     animation: heartbeat 1.5s ease-in-out both;
+    cursor: pointer;
 }
 
 .tile {
