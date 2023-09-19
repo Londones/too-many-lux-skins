@@ -5,7 +5,7 @@
 
 body {
     background: linear-gradient(270deg, #cc6aa5, #3e91cc, #2dcca7);
-    background-size: 600% 100%;
+    background-size: 100% 100%;
     overflow: hidden;
 }
 
@@ -31,10 +31,6 @@ body {
     }
 }
 
-.bg-pan-right {
-    animation: bg-pan-right 8s infinite alternate-reverse both;
-}
-
 @keyframes slide-transparency {
     0% {
         opacity: 0;
@@ -47,11 +43,6 @@ body {
     100% {
         opacity: 0;
     }
-}
-
-.animate-opacity {
-    animation-name: slide-transparency;
-    animation-iteration-count: infinite;
 }
 
 .freq-5 {
