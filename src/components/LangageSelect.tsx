@@ -28,175 +28,204 @@ const LangageSelect: React.FC<LangageSelectProps> = ({
           case "en_US":
             return {
               label: "English",
-              image: "https://www.countryflagicons.com/FLAT/16/US.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg",
               value: "en_US",
             };
           case "fr_FR":
             return {
               label: "Français",
-              image: "https://www.countryflagicons.com/FLAT/16/FR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg",
               value: "fr_FR",
             };
           case "es_ES":
             return {
               label: "Español",
-              image: "https://www.countryflagicons.com/FLAT/16/ES.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/ES.svg",
               value: "es_ES",
             };
           case "de_DE":
             return {
               label: "Deutsch",
-              image: "https://www.countryflagicons.com/FLAT/16/DE.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/DE.svg",
               value: "de_DE",
             };
           case "it_IT":
             return {
               label: "Italiano",
-              image: "https://www.countryflagicons.com/FLAT/16/IT.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/IT.svg",
               value: "it_IT",
             };
           case "pt_PT":
             return {
               label: "Português",
-              image: "https://www.countryflagicons.com/FLAT/16/PT.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/PT.svg",
               value: "pt_PT",
             };
           case "ja_JP":
             return {
               label: "日本語",
-              image: "https://www.countryflagicons.com/FLAT/16/JP.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/JP.svg",
               value: "ja_JP",
             };
           case "ko_KR":
             return {
               label: "한국어",
-              image: "https://www.countryflagicons.com/FLAT/16/KR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/KR.svg",
               value: "ko_KR",
             };
           case "zh_CN":
             return {
               label: "简体中文",
-              image: "https://www.countryflagicons.com/FLAT/16/CN.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/CN.svg",
               value: "zh_CN",
             };
           case "ru_RU":
             return {
               label: "Русский",
-              image: "https://www.countryflagicons.com/FLAT/16/RU.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/RU.svg",
               value: "ru_RU",
             };
           case "tr_TR":
             return {
               label: "Türkçe",
-              image: "https://www.countryflagicons.com/FLAT/16/TR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/TR.svg",
               value: "tr_TR",
             };
           case "ms_MY":
             return {
               label: "Bahasa Melayu",
-              image: "https://www.countryflagicons.com/FLAT/16/MY.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/MY.svg",
               value: "ms_MY",
             };
           case "id_ID":
             return {
               label: "Bahasa Indonesia",
-              image: "https://www.countryflagicons.com/FLAT/16/ID.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/ID.svg",
               value: "id_ID",
             };
           case "th_TH":
             return {
               label: "ภาษาไทย",
-              image: "https://www.countryflagicons.com/FLAT/16/TH.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/TH.svg",
               value: "th_TH",
             };
           case "vi_VN":
             return {
               label: "Tiếng Việt",
-              image: "https://www.countryflagicons.com/FLAT/16/VN.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/VN.svg",
               value: "vi_VN",
             };
           case "pl_PL":
             return {
               label: "Polski",
-              image: "https://www.countryflagicons.com/FLAT/16/PL.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/PL.svg",
               value: "pl_PL",
             };
           case "pt_BR":
             return {
               label: "Português Brasileiro",
-              image: "https://www.countryflagicons.com/FLAT/16/BR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/BR.svg",
               value: "pt_BR",
             };
           case "ro_RO":
             return {
               label: "Română",
-              image: "https://www.countryflagicons.com/FLAT/16/RO.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/RO.svg",
               value: "ro_RO",
             };
           case "hu_HU":
             return {
               label: "Magyar",
-              image: "https://www.countryflagicons.com/FLAT/16/HU.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/HU.svg",
               value: "hu_HU",
             };
           case "cs_CZ":
             return {
               label: "Čeština",
-              image: "https://www.countryflagicons.com/FLAT/16/CZ.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/CZ.svg",
               value: "cs_CZ",
             };
           case "el_GR":
             return {
               label: "Ελληνικά",
-              image: "https://www.countryflagicons.com/FLAT/16/GR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/GR.svg",
               value: "el_GR",
             };
           case "en_GB":
             return {
               label: "English",
-              image: "https://www.countryflagicons.com/FLAT/16/GB.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/BG.svg",
               value: "en_GB",
             };
           case "es_MX":
             return {
               label: "Español",
-              image: "https://www.countryflagicons.com/FLAT/16/MX.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/MX.svg",
               value: "es_MX",
             };
           case "es_AR":
             return {
               label: "Español",
-              image: "https://www.countryflagicons.com/FLAT/16/AR.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/AR.svg",
               value: "es_AR",
             };
           case "en_AU":
             return {
               label: "English",
-              image: "https://www.countryflagicons.com/FLAT/16/AU.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg",
               value: "en_AU",
             };
           case "en_PH":
             return {
               label: "English",
-              image: "https://www.countryflagicons.com/FLAT/16/PH.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/PH.svg",
               value: "en_PH",
             };
           case "zh_MY":
             return {
               label: "简体中文",
-              image: "https://www.countryflagicons.com/FLAT/16/MY.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/MY.svg",
               value: "zh_MY",
             };
           case "zh_TW":
             return {
               label: "繁體中文",
-              image: "https://www.countryflagicons.com/FLAT/16/TW.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/TW.svg",
               value: "zh_TW",
             };
           case "EN_SG":
             return {
               label: "English",
-              image: "https://www.countryflagicons.com/FLAT/16/SG.png",
+              image:
+                "http://purecatamphetamine.github.io/country-flag-icons/3x2/SG.svg",
               value: "EN_SG",
             };
           default:
@@ -216,7 +245,11 @@ const LangageSelect: React.FC<LangageSelectProps> = ({
       {langagesToFlagsAndLangagesLabelsArray(languages).map((langage) => (
         <Select.Option key={langage?.value} value={langage?.value}>
           <div className="flex items-center">
-            <img className="mr-1" src={langage?.image} alt={langage?.value} />
+            <img
+              className="mr-1 w-4"
+              src={langage?.image}
+              alt={langage?.label}
+            />
             <span>{langage?.label}</span>
           </div>
         </Select.Option>

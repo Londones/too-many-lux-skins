@@ -79,6 +79,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
       }
 
       if (counter === roundsNumber) {
+        carouselRef.current?.setSelectedIndex(randomNum);
         clearTimeout(timeoutId!);
       } else {
         timeoutId = setTimeout(spinAnimation, delay);
