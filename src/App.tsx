@@ -16,7 +16,7 @@ function App() {
   const preferedLangage = localStorage.getItem("langage");
   const [langage, setLangage] = useState<string>(preferedLangage ?? "en_US");
   const [champion, setChampion] = useState<any>(null);
-  const [version, setVersion] = useState<string>("13.24");
+  const [version, setVersion] = useState<string>("13.24.1");
   const championFetcher = new ChampionFetcherService(version, langage);
   const [languages, setLanguages] = useState<string[]>([]);
 
