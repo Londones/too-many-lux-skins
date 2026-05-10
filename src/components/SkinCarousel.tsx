@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { SkinFetcherService } from "../services/skin-fetcher.service";
+import {
+  ChampionSkinEntry,
+  SkinFetcherService,
+} from "../services/skin-fetcher.service";
 import { CarouselItem, Carousel, CarouselRef } from "react-round-carousel";
 import { ChampionFetcherService } from "../services/champion-fetcher.service";
 import { Button } from "antd";
@@ -8,23 +11,27 @@ import { SyncOutlined } from "@ant-design/icons";
 interface SkinCarouselProps {
   champion: string;
   championFetcher: ChampionFetcherService;
+  includeChromas: boolean;
   className?: string;
 }
 
 const SkinCarousel: React.FC<SkinCarouselProps> = ({
   championFetcher,
   champion,
+  includeChromas,
   className,
 }) => {
   const skinFetcher = new SkinFetcherService(championFetcher);
-  const [skins, setSkins] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [skins, setSkins] = useState<ChampionSkinEntry[]>([]);
   const [champName, setChampName] = useState<string>("");
   const [carouselClass, setCarouselClass] = useState<string>("");
 
   useEffect(() => {
     const fetchSkins = async () => {
-      const skins = await skinFetcher.returnChampionSkins(champion);
+      const skins = await skinFetcher.returnChampionSkins(
+        champion,
+        includeChromas
+      );
       setChampName(skinFetcher.champName);
       setSkins(skins);
     };
@@ -32,7 +39,7 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     if (champion) {
       fetchSkins();
     }
-  }, [champion, championFetcher]);
+  }, [champion, championFetcher, includeChromas]);
 
   useEffect(() => {
     const setClass = () => {
@@ -45,12 +52,21 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
     }
   }, [className, champion]);
 
-  const items: CarouselItem[] = skins.map((skin: any, index: number) => ({
-    alt: `${skin.name === "default" ? champion : skin.name}`,
-    image: skinFetcher.skinNumToUrl(champion, skin.num),
+  const displayName = (skin: ChampionSkinEntry): string => {
+    if (skin.isChroma) {
+      return skin.name;
+    }
+
+    return skin.name === "default" ? champName : skin.name;
+  };
+
+  const items: CarouselItem[] = skins.map((skin: ChampionSkinEntry, index: number) => ({
+    alt: displayName(skin),
+    image: skinFetcher.skinNumToUrl(champion, skin.imageNum),
     content: (
-      <div className={champion + index}>
-        <span>{skin.name === "default" ? champName : skin.name}</span>
+      <div className={`${champion + index} carousel-item-label`}>
+        <span className="carousel-item-title">{displayName(skin)}</span>
+        {skin.isChroma && <span className="chroma-badge">CHROMA</span>}
       </div>
     ),
   }));
@@ -58,6 +74,10 @@ const SkinCarousel: React.FC<SkinCarouselProps> = ({
   const carouselRef = React.createRef<CarouselRef>();
 
   const spin = () => {
+    if (!skins.length) {
+      return;
+    }
+
     const randomNum = Math.floor(Math.random() * skins.length);
     let counter = 0;
     let roundsNumber = 300 + randomNum;

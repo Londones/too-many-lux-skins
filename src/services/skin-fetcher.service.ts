@@ -1,5 +1,14 @@
 import { ChampionFetcherService } from "./champion-fetcher.service";
 
+export interface ChampionSkinEntry {
+  name: string;
+  num: number;
+  imageNum: number;
+  isChroma: boolean;
+  parentSkinNum?: number;
+  parentSkinName?: string;
+}
+
 export class SkinFetcherService {
   public skinData: any;
   public champName: string = "";
@@ -11,9 +20,10 @@ export class SkinFetcherService {
 
   private async fetchChampion(championName: string): Promise<any> {
     let json: Promise<any>;
+    const version = await this.champService.getVersion();
 
     const promise = await fetch(
-      `https://ddragon.leagueoflegends.com/cdn/${this.champService.version}/data/${this.champService.language}/champion/${championName}.json`
+      `https://ddragon.leagueoflegends.com/cdn/${version}/data/${this.champService.language}/champion/${championName}.json`
     );
 
     json = await promise.json();
@@ -27,11 +37,42 @@ export class SkinFetcherService {
     });
   }
 
-  public async returnChampionSkins(champion: string): Promise<Object> {
+  public async returnChampionSkins(
+    champion: string,
+    includeChromas: boolean = true
+  ): Promise<ChampionSkinEntry[]> {
     return await this.fetchChampion(champion).then((data) => {
-      this.skinData = data.data[champion].skins;
+      const rawSkins = data.data[champion].skins;
+      this.skinData = rawSkins;
       this.champName = data.data[champion].name;
-      return data.data[champion].skins;
+
+      const baseSkinByNum = new Map<number, any>();
+      rawSkins.forEach((skin: any) => {
+        if (skin.parentSkin === undefined || skin.parentSkin === null) {
+          baseSkinByNum.set(skin.num, skin);
+        }
+      });
+
+      const normalizedSkins: ChampionSkinEntry[] = rawSkins
+        .filter(
+          (skin: any) =>
+            includeChromas || skin.parentSkin === undefined || skin.parentSkin === null
+        )
+        .map((skin: any) => {
+          const isChroma = skin.parentSkin !== undefined && skin.parentSkin !== null;
+          const parentSkin = isChroma ? baseSkinByNum.get(Number(skin.parentSkin)) : undefined;
+
+          return {
+          name: skin.name,
+          num: skin.num,
+          imageNum: isChroma && parentSkin ? Number(parentSkin.num) : skin.num,
+          isChroma,
+          parentSkinNum: isChroma ? Number(skin.parentSkin) : undefined,
+          parentSkinName: isChroma && parentSkin ? parentSkin.name : undefined,
+        };
+      });
+
+      return normalizedSkins;
     });
   }
 

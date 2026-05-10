@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./assets/App.css";
 import { ChampionFetcherService } from "./services/champion-fetcher.service";
-import { fetchVersion } from "./services/lastestversion-fetcher.service";
 import { fetchLanguages } from "./services/langage-fetcher.service";
 import SearchBar from "./components/SearchBar";
 import SkinCarousel from "./components/SkinCarousel";
@@ -9,6 +8,7 @@ import LangageSelect from "./components/LangageSelect";
 import { HeartTwoTone } from "@ant-design/icons";
 import { BackgroundChangerService } from "./services/background-changer.service";
 import TitleImage from "./components/TitleImage";
+import { Switch } from "antd";
 
 function App() {
   const backgroundChanger = new BackgroundChangerService();
@@ -16,18 +16,16 @@ function App() {
   const preferedLangage = localStorage.getItem("langage");
   const [langage, setLangage] = useState<string>(preferedLangage ?? "en_US");
   const [champion, setChampion] = useState<any>(null);
-  const [version, setVersion] = useState<string>("14.16.1");
-  const championFetcher = new ChampionFetcherService(version, langage);
+  const [includeChromas, setIncludeChromas] = useState<boolean>(false);
+  const championFetcher = useMemo(
+    () => new ChampionFetcherService(langage),
+    [langage]
+  );
   const [languages, setLanguages] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       backgroundChanger.initBackground(localTime);
-      const mostRecentVersion = await fetchVersion();
-      if (version !== mostRecentVersion) {
-        setVersion(mostRecentVersion);
-        championFetcher.version = mostRecentVersion;
-      }
       const languages = await fetchLanguages();
       setLanguages(languages);
     };
@@ -47,7 +45,7 @@ function App() {
   return (
     <div className="App bg-pan-right">
       <TitleImage localTime={localTime} />
-      <div className="flex justify-center mt-[2rem]">
+      <div className="flex justify-center items-center gap-2 mt-[2rem]">
         <SearchBar
           championFetcher={championFetcher}
           onChampionSelect={handleChampionSelect}
@@ -58,13 +56,20 @@ function App() {
           championFetcher={championFetcher}
           onSelect={handleLangageSelect}
         />
+        <div className="flex h-10 items-center rounded border border-white/80 bg-white px-3">
+          <span className="mr-2 text-xs uppercase tracking-wide text-slate-700">
+            Chromas
+          </span>
+          <Switch checked={includeChromas} onChange={setIncludeChromas} />
+        </div>
       </div>
       {champion && (
         <SkinCarousel
           className={!champion ? "fade-in-top" : ""}
-          key={champion}
+          key={`${champion}-${includeChromas}`}
           champion={champion}
           championFetcher={championFetcher}
+          includeChromas={includeChromas}
         />
       )}
       <div className="footer">

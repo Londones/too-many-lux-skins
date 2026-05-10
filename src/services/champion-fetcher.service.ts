@@ -1,31 +1,46 @@
+import { fetchVersion } from "./lastestversion-fetcher.service";
+
 export class ChampionFetcherService {
   public language: string;
   public version: string;
   private championsData: any;
   private assetCache: { [key: string]: string } = {};
+  private static latestVersionPromise: Promise<string> | null = null;
 
-  constructor(version: string, language?: string) {
-    if (!language) {
-      this.language = "en_US";
-    } else {
-      this.language = language;
-    }
-    this.version = version;
+  constructor(language: string = "en_US", version?: string) {
+    this.language = language;
+    this.version = version ?? "";
   }
 
-  private async fetchChampionsData(language?: string): Promise<any> {
-    if (!language) {
-      this.language = "en_US";
+  private async resolveVersion(): Promise<string> {
+    if (this.version) {
+      return this.version;
     }
-    const url = `https://ddragon.leagueoflegends.com/cdn/${this.version}/data/${this.language}/champion.json`;
+
+    if (!ChampionFetcherService.latestVersionPromise) {
+      ChampionFetcherService.latestVersionPromise = fetchVersion();
+    }
+
+    this.version = await ChampionFetcherService.latestVersionPromise;
+    return this.version;
+  }
+
+  public async getVersion(): Promise<string> {
+    return this.resolveVersion();
+  }
+
+  private async fetchChampionsData(): Promise<any> {
+    const version = await this.resolveVersion();
+    const url = `https://ddragon.leagueoflegends.com/cdn/${version}/data/${this.language}/champion.json`;
     const response = await fetch(url);
     const data = await response.json();
     return data.data;
   }
 
   public async fetchChampionSquareAsset(champion: string): Promise<string> {
+    const version = await this.resolveVersion();
     var championImage = this.championsData[champion].image.full;
-    const assetUrl = `https://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${championImage}`;
+    const assetUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championImage}`;
     this.assetCache[championImage] = assetUrl;
     return assetUrl;
   }

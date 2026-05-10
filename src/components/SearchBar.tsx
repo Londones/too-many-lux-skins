@@ -8,6 +8,13 @@ interface SearchBarProps {
   onChampionSelect: (selectedChampion: any) => void;
 }
 
+const championAliasMap: Record<string, string[]> = {
+  monkeyking: ["wukong", "monkey-king", "monkey king"],
+};
+
+const normalizeSearchTerm = (value: string): string =>
+  value.toLowerCase().replace(/[\s_-]/g, "");
+
 const SearchBar: React.FC<SearchBarProps> = ({
   championFetcher,
   onChampionSelect,
@@ -25,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     };
 
     fetchData();
-  }, []);
+  }, [championFetcher]);
 
   const handleFocus = () => {
     setShowDropdown(false);
@@ -39,8 +46,23 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const filterOption = (inputValue: any, option: any) => {
-    return option.value.toLowerCase().startsWith(inputValue.toLowerCase());
+  const filterOption = (inputValue: string, option: any) => {
+    const normalizedInput = normalizeSearchTerm(inputValue);
+
+    if (!normalizedInput) {
+      return true;
+    }
+
+    const value = option?.value ?? "";
+    const championData = championsArray.find((champion) => champion.id === value);
+    const championName = championData?.championName ?? "";
+    const aliases = championAliasMap[value.toLowerCase()] ?? [];
+
+    const terms = [value, championName, ...aliases]
+      .filter(Boolean)
+      .map((term: string) => normalizeSearchTerm(term));
+
+    return terms.some((term: string) => term.includes(normalizedInput));
   };
 
   const handleChampionSelect = (selectedChampion: string) => {
